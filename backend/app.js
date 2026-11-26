@@ -17,8 +17,9 @@ const zbxApp = express();
 
 // 课程作业：开放全部跨域访问
 zbxApp.use(cors());
-zbxApp.use(express.json());
-zbxApp.use(express.urlencoded({ extended: true }));
+// LLM 实践需上传图片/音频（base64），放宽请求体上限到 30MB
+zbxApp.use(express.json({ limit: '30mb' }));
+zbxApp.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
 // 所有接口统一以 /api 为前缀
 zbxApp.use('/api', zbxRoutes);

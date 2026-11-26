@@ -1,0 +1,52 @@
+<!--
+  姓名：zhangboxin
+  学号：24001010910
+  时间：2026-11-19
+  大模型：DeepSeek-V4.1-Flash
+  页面：科技新闻列表（数据来自 MySQL 表 zbx_news）
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="校园二手交易平台 - 科技新闻列表">
+  <title>科技新闻列表 | 校园二手交易平台</title>
+  <link rel="stylesheet" href="css/zbx_style.css">
+</head>
+<body>
+  <header class="zbx_topbar">
+    <div class="zbx_brand">
+      <span class="zbx_brand-mark">ZBX</span>
+      <span class="zbx_brand-text">校园二手交易平台</span>
+    </div>
+    <a class="zbx_back-link" href="index.html">← 返回首页</a>
+  </header>
+
+  <main class="zbx_main">
+    <section class="zbx_news-header">
+      <p class="zbx_eyebrow">科技新闻 · MySQL 数据</p>
+      <h1 class="zbx_title zbx_title-sm">科技新闻列表</h1>
+      <p class="zbx_subtitle">新闻数据存储于数据库表 zbx_news，由后端接口读取后展示。</p>
+
+      <div class="zbx_interface-box">
+        <span class="zbx_interface-label">后端接口</span>
+        <a class="zbx_interface-url" href="http://localhost:8910/api/news" target="_blank" rel="noopener">GET http://localhost:8910/api/news</a>
+        <span class="zbx_interface-note">数据表：zbx_news</span>
+      </div>
+
+      <p id="zbx_news_count" class="zbx_news-count">正在加载新闻数据...</p>
+    </section>
+
+    <section id="zbx_news_list" class="zbx_news-list" aria-live="polite">
+      <p class="zbx_news-state">正在请求后端接口...</p>
+    </section>
+  </main>
+
+  <footer class="zbx_footer">
+    <p>zhangboxin · 24001010910 · 校园二手交易平台</p>
+  </footer>
+
+  <script src="js/zbx_news.js"></script>
+</body>
+</html>

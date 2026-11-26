@@ -1,0 +1,76 @@
+<!--
+  姓名：zhangboxin
+  学号：24001010910
+  时间：2026-11-26
+  大模型：DeepSeek-V4.1-Flash
+  页面：中华美食街在线客服（多平台可切换：硅基流动 / 七牛）
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="中华美食街在线客服 - 多平台切换">
+  <title>中华美食街在线客服 | zhangboxin</title>
+  <link rel="stylesheet" href="css/zbx_style.css">
+</head>
+<body>
+  <header class="zbx_topbar">
+    <div class="zbx_brand">
+      <span class="zbx_brand-mark">ZBX</span>
+      <span class="zbx_brand-text">中华美食街在线客服</span>
+    </div>
+    <a class="zbx_back-link" href="index.html">← 返回首页</a>
+  </header>
+
+  <main class="zbx_main">
+    <section class="zbx_chat-header">
+      <p class="zbx_eyebrow">在线客服 · 多平台热切换</p>
+      <h1 class="zbx_title zbx_title-sm">中华美食街在线客服</h1>
+      <p class="zbx_subtitle">可咨询营业时间、招牌菜、配送范围三类问题，其他问题会引导您留言。</p>
+
+      <div class="zbx_interface-box">
+        <span class="zbx_interface-label">后端接口</span>
+        <a class="zbx_interface-url" href="#" onclick="return false;">POST http://localhost:8910/api/chat</a>
+        <span class="zbx_interface-note" id="zbx_chat_model_note">当前平台：硅基流动</span>
+      </div>
+    </section>
+
+    <section class="zbx_chat-wrapper">
+      <div class="zbx_chat-toolbar">
+        <label class="zbx_chat-toolbar-label" for="zbx_chat_provider">模型平台</label>
+        <select id="zbx_chat_provider" class="zbx_chat-select">
+          <option value="siliconflow">硅基流动</option>
+          <option value="qiniu">七牛</option>
+        </select>
+        <span class="zbx_chat-toolbar-tip">切换平台后继续对话即可</span>
+      </div>
+
+      <div id="zbx_chat_messages" class="zbx_chat-messages" aria-live="polite">
+        <div class="zbx_chat-msg zbx_chat-msg-assistant">
+          <div class="zbx_chat-avatar">客服</div>
+          <div class="zbx_chat-bubble">您好，这里是中华美食街在线客服～ 可以咨询营业时间、招牌菜和配送范围，请问有什么可以帮您？</div>
+        </div>
+      </div>
+
+      <form id="zbx_chat_form" class="zbx_chat-form">
+        <textarea
+          id="zbx_chat_input"
+          class="zbx_chat-input"
+          rows="1"
+          placeholder="请输入您的问题，按 Enter 发送，Shift+Enter 换行..."
+          autocomplete="off"
+        ></textarea>
+        <button type="submit" id="zbx_chat_send" class="zbx_chat-send">发送</button>
+      </form>
+      <p id="zbx_chat_status" class="zbx_chat-status"></p>
+    </section>
+  </main>
+
+  <footer class="zbx_footer">
+    <p>zhangboxin · 24001010910 · 中华美食街在线客服</p>
+  </footer>
+
+  <script src="js/zbx_chat.js"></script>
+</body>
+</html>

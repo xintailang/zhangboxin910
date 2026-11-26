@@ -1,0 +1,58 @@
+<!--
+  姓名：zhangboxin
+  学号：24001010910
+  时间：2026-11-19
+  大模型：DeepSeek-V4.1-Flash
+  页面：数据库连接测试
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="校园二手交易平台 - MySQL 数据库连接测试">
+  <title>数据库连接 | 校园二手交易平台</title>
+  <link rel="stylesheet" href="css/zbx_style.css">
+</head>
+<body>
+  <header class="zbx_topbar">
+    <div class="zbx_brand">
+      <span class="zbx_brand-mark">ZBX</span>
+      <span class="zbx_brand-text">校园二手交易平台</span>
+    </div>
+    <a class="zbx_back-link" href="index.html">← 返回首页</a>
+  </header>
+
+  <main class="zbx_main zbx_main-narrow">
+    <section class="zbx_panel">
+      <p class="zbx_eyebrow">MySQL · 连接测试</p>
+      <h1 class="zbx_title zbx_title-sm">连接数据库</h1>
+      <p class="zbx_subtitle">输入 MySQL 用户名与密码，由后端验证能否成功连接数据库服务。</p>
+
+      <form id="zbx_db_form" class="zbx_form" novalidate>
+        <label class="zbx_field" for="zbx_db_user">
+          <span class="zbx_field-label">用户名</span>
+          <input id="zbx_db_user" class="zbx_input" type="text" value="root" placeholder="请输入数据库用户名" autocomplete="username" required>
+        </label>
+
+        <label class="zbx_field" for="zbx_db_password">
+          <span class="zbx_field-label">密码</span>
+          <input id="zbx_db_password" class="zbx_input" type="password" value="zbx12345" placeholder="请输入数据库密码" autocomplete="current-password" required>
+        </label>
+
+        <button id="zbx_db_submit" class="zbx_button" type="submit">连接数据库</button>
+      </form>
+
+      <p class="zbx_hint">提示：连接目标为当前后端配置的 MySQL 主机（默认 localhost:3306），密码仅用于本次连接测试，不会写入文件。</p>
+
+      <div id="zbx_db_result" class="zbx_result" hidden></div>
+    </section>
+  </main>
+
+  <footer class="zbx_footer">
+    <p>zhangboxin · 24001010910 · 校园二手交易平台</p>
+  </footer>
+
+  <script src="js/zbx_database.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!--
+  姓名：zhangboxin
+  学号：24001010910
+  时间：2026-11-26
+  大模型：DeepSeek-V4.1-Flash
+  页面：在线客服（调用七牛云 AI 推理接口）
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="校园二手交易平台 - 在线客服">
+  <title>在线客服 | 校园二手交易平台</title>
+  <link rel="stylesheet" href="css/zbx_style.css">
+</head>
+<body>
+  <header class="zbx_topbar">
+    <div class="zbx_brand">
+      <span class="zbx_brand-mark">ZBX</span>
+      <span class="zbx_brand-text">校园二手交易平台</span>
+    </div>
+    <a class="zbx_back-link" href="index.html">← 返回首页</a>
+  </header>
+
+  <main class="zbx_main">
+    <section class="zbx_service-header">
+      <p class="zbx_eyebrow">在线客服 · 七牛云</p>
+      <h1 class="zbx_title zbx_title-sm">在线客服</h1>
+      <p class="zbx_subtitle">关于商品发布、交易流程、账号使用等问题，都可以向客服咨询。</p>
+
+      <div class="zbx_interface-box">
+        <span class="zbx_interface-label">后端接口</span>
+        <a class="zbx_interface-url" href="#" onclick="return false;">POST http://localhost:8910/api/service</a>
+        <span class="zbx_interface-note">模型：qiniu/conatus-free</span>
+      </div>
+    </section>
+
+    <section class="zbx_service-wrapper">
+      <div class="zbx_service-bar">
+        <span class="zbx_service-dot"></span>
+        <span class="zbx_service-name">客服小助手</span>
+        <span class="zbx_service-state">在线</span>
+      </div>
+
+      <div id="zbx_service_messages" class="zbx_chat-messages zbx_service-messages" aria-live="polite">
+        <div class="zbx_chat-msg zbx_chat-msg-assistant">
+          <div class="zbx_chat-avatar">客服</div>
+          <div class="zbx_chat-bubble">您好，我是校园二手交易平台的在线客服，很高兴为您服务！请问有什么可以帮您？</div>
+        </div>
+      </div>
+
+      <div id="zbx_service_quick" class="zbx_service-quick">
+        <button type="button" class="zbx_service-chip" data-zbx-question="怎么发布一件商品？">怎么发布一件商品？</button>
+        <button type="button" class="zbx_service-chip" data-zbx-question="交易流程是怎样的？">交易流程是怎样的？</button>
+        <button type="button" class="zbx_service-chip" data-zbx-question="如何修改我的账号信息？">如何修改账号信息？</button>
+      </div>
+
+      <form id="zbx_service_form" class="zbx_chat-form">
+        <textarea
+          id="zbx_service_input"
+          class="zbx_chat-input"
+          rows="1"
+          placeholder="请输入您的问题，按 Enter 发送，Shift+Enter 换行..."
+          autocomplete="off"
+        ></textarea>
+        <button type="submit" id="zbx_service_send" class="zbx_chat-send">发送</button>
+      </form>
+      <p id="zbx_service_status" class="zbx_chat-status"></p>
+    </section>
+  </main>
+
+  <footer class="zbx_footer">
+    <p>zhangboxin · 24001010910 · 校园二手交易平台</p>
+  </footer>
+
+  <script src="js/zbx_service.js"></script>
+</body>
+</html>

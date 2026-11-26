@@ -1,0 +1,153 @@
+<!--
+  姓名：zhangboxin
+  学号：24001010910
+  时间：2026-11-26
+  大模型：DeepSeek-V4.1-Flash
+  页面：LLM 实践操作痕迹展示（多平台客服 / 知识库 / 图像识别 / 语音识别）
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="课程实践 - LLM 实践操作痕迹展示">
+  <title>LLM 实践操作痕迹展示 | zhangboxin</title>
+  <link rel="stylesheet" href="css/zbx_style.css">
+</head>
+<body>
+  <header class="zbx_topbar">
+    <div class="zbx_brand">
+      <span class="zbx_brand-mark">ZBX</span>
+      <span class="zbx_brand-text">课程实践 · LLM 实践</span>
+    </div>
+    <a class="zbx_back-link" href="index.html">← 返回首页</a>
+  </header>
+
+  <main class="zbx_main">
+    <section class="zbx_llm-header">
+      <p class="zbx_eyebrow">课程实践 · LLM 实践操作痕迹</p>
+      <h1 class="zbx_title zbx_title-sm">LLM 实践操作痕迹展示</h1>
+      <p class="zbx_subtitle">以下四项均为真实调用大模型接口的可交互演示，可直接在页面操作并查看结果。</p>
+    </section>
+
+    <!-- 1. 多平台 AI 客服切换 -->
+    <section class="zbx_llm-card" id="zbx_llm_sec1">
+      <div class="zbx_llm-card-head">
+        <span class="zbx_llm-index">01</span>
+        <div>
+          <h2 class="zbx_llm-title">多平台 AI 客服热切换</h2>
+          <p class="zbx_llm-desc">页面下拉框切换“硅基流动 / 七牛”，后端读取 .env 配置，切换后照常对话。</p>
+        </div>
+      </div>
+
+      <div class="zbx_llm-toolbar">
+        <label class="zbx_chat-toolbar-label" for="zbx_llm_provider">模型平台</label>
+        <select id="zbx_llm_provider" class="zbx_chat-select">
+          <option value="siliconflow">硅基流动</option>
+          <option value="qiniu">七牛</option>
+        </select>
+        <span class="zbx_chat-toolbar-tip" id="zbx_llm_provider_tip">当前平台：硅基流动</span>
+      </div>
+
+      <div id="zbx_llm_chat_messages" class="zbx_chat-messages zbx_llm-chat-messages" aria-live="polite">
+        <div class="zbx_chat-msg zbx_chat-msg-assistant">
+          <div class="zbx_chat-avatar">客服</div>
+          <div class="zbx_chat-bubble">您好，这里是中华美食街在线客服～ 可以咨询营业时间、招牌菜和配送范围。</div>
+        </div>
+      </div>
+
+      <form id="zbx_llm_chat_form" class="zbx_chat-form">
+        <textarea id="zbx_llm_chat_input" class="zbx_chat-input" rows="1" placeholder="请输入问题，Enter 发送..." autocomplete="off"></textarea>
+        <button type="submit" id="zbx_llm_chat_send" class="zbx_chat-send">发送</button>
+      </form>
+      <p id="zbx_llm_chat_status" class="zbx_chat-status"></p>
+    </section>
+
+    <!-- 2. 知识库 -->
+    <section class="zbx_llm-card" id="zbx_llm_sec2">
+      <div class="zbx_llm-card-head">
+        <span class="zbx_llm-index">02</span>
+        <div>
+          <h2 class="zbx_llm-title">知识库（上传文件 + 检索问答）</h2>
+          <p class="zbx_llm-desc">上传 txt / md 文件建立知识库，提问时先检索相关片段，再由大模型基于资料作答。</p>
+        </div>
+      </div>
+
+      <div class="zbx_llm-row">
+        <input type="file" id="zbx_llm_kb_file" class="zbx_llm-file" accept=".txt,.md,.markdown,text/plain,text/markdown">
+        <button type="button" id="zbx_llm_kb_upload" class="zbx_llm-btn">上传到知识库</button>
+        <span id="zbx_llm_kb_upload_status" class="zbx_llm-hint">支持 .txt / .md</span>
+      </div>
+
+      <div id="zbx_llm_kb_docs" class="zbx_llm-doc-list"></div>
+
+      <div class="zbx_llm-row">
+        <input type="text" id="zbx_llm_kb_question" class="zbx_llm-input" placeholder="基于知识库提问，例如：营业时间是几点？">
+        <button type="button" id="zbx_llm_kb_ask" class="zbx_llm-btn zbx_llm-btn-accent">提问</button>
+      </div>
+
+      <div id="zbx_llm_kb_result" class="zbx_llm-result" hidden>
+        <p class="zbx_llm-result-label">回答</p>
+        <div id="zbx_llm_kb_answer" class="zbx_llm-result-body"></div>
+        <p class="zbx_llm-result-label">命中的知识片段</p>
+        <div id="zbx_llm_kb_sources" class="zbx_llm-sources"></div>
+      </div>
+    </section>
+
+    <!-- 3. 图像识别 -->
+    <section class="zbx_llm-card" id="zbx_llm_sec3">
+      <div class="zbx_llm-card-head">
+        <span class="zbx_llm-index">03</span>
+        <div>
+          <h2 class="zbx_llm-title">图像识别</h2>
+          <p class="zbx_llm-desc">上传一张图片，调用视觉大模型（Qwen3-VL）识别并描述内容。</p>
+        </div>
+      </div>
+
+      <div class="zbx_llm-row">
+        <input type="file" id="zbx_llm_vision_file" class="zbx_llm-file" accept="image/*">
+        <input type="text" id="zbx_llm_vision_question" class="zbx_llm-input" placeholder="想问图片什么？默认：请描述这张图片的内容">
+        <button type="button" id="zbx_llm_vision_btn" class="zbx_llm-btn zbx_llm-btn-accent">开始识别</button>
+      </div>
+
+      <div class="zbx_llm-preview-wrap">
+        <img id="zbx_llm_vision_preview" class="zbx_llm-preview" alt="待识别图片预览" hidden>
+        <div id="zbx_llm_vision_result" class="zbx_llm-result" hidden>
+          <p class="zbx_llm-result-label">识别结果</p>
+          <div id="zbx_llm_vision_text" class="zbx_llm-result-body"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 语音识别 -->
+    <section class="zbx_llm-card" id="zbx_llm_sec4">
+      <div class="zbx_llm-card-head">
+        <span class="zbx_llm-index">04</span>
+        <div>
+          <h2 class="zbx_llm-title">语音识别</h2>
+          <p class="zbx_llm-desc">上传一段语音（wav / mp3 / m4a / ogg），调用语音大模型（SenseVoice）转成文字。</p>
+        </div>
+      </div>
+
+      <div class="zbx_llm-row">
+        <input type="file" id="zbx_llm_asr_file" class="zbx_llm-file" accept="audio/*">
+        <button type="button" id="zbx_llm_asr_btn" class="zbx_llm-btn zbx_llm-btn-accent">开始识别</button>
+        <span id="zbx_llm_asr_status" class="zbx_llm-hint"></span>
+      </div>
+
+      <div id="zbx_llm_asr_result" class="zbx_llm-result" hidden>
+        <p class="zbx_llm-result-label">识别文字</p>
+        <div id="zbx_llm_asr_text" class="zbx_llm-result-body"></div>
+      </div>
+    </section>
+
+    <p class="zbx_llm-footer-note">以上接口：POST /api/chat、/api/llm/kb/upload、/api/llm/kb/ask、/api/llm/vision、/api/llm/asr</p>
+  </main>
+
+  <footer class="zbx_footer">
+    <p>zhangboxin · 24001010910 · LLM 实践操作痕迹展示</p>
+  </footer>
+
+  <script src="js/zbx_llm.js"></script>
+</body>
+</html>
